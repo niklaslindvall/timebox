@@ -1,7 +1,7 @@
-import bluetooth
 import time
 import click
 import math
+import socket
 from colour import Color
 from itertools import product
 from os import listdir
@@ -13,7 +13,8 @@ from math import modf
 class Timebox:
     debug=False
     def __init__(self, addr):
-        self.sock = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
+        self.sock = socket.socket(socket.AF_BLUETOOTH, socket.SOCK_STREAM,
+                                  socket.BTPROTO_RFCOMM)
         self.addr = addr
 
     def connect(self):
