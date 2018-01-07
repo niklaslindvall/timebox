@@ -1,7 +1,7 @@
 """Provides class TimeBox that encapsulates the TimeBox communication."""
 
 import select
-from bluetooth import BluetoothSocket, RFCOMM
+import socket
 from messages import TimeBoxMessages
 
 class TimeBox:
@@ -37,7 +37,8 @@ class TimeBox:
         if host is None:
             host = self.DEFAULTHOST
         #print("connecting to %s at %s" % (self.host, self.port))
-        self.socket = BluetoothSocket(RFCOMM)
+        self.socket = socket.socket(socket.AF_BLUETOOTH, socket.SOCK_STREAM,
+                                    socket.BTPROTO_RFCOMM)
         self.socket.connect((host, port))
         self.socket.setblocking(0)
 
